@@ -1,29 +1,16 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+			<div class="logo"></div>
+			<router-link to="/protocols">протоколы</router-link>
+			<router-link to="/resolutions">решения спб мас</router-link>
+			<router-link to="/regulations">устав</router-link>
+			<router-link to="/post-editor">новая запись</router-link>
     </div>
-    <router-view/>
+    <router-view id="router-view"/>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
+<style lang="scss" src="./global.scss">
+
 </style>
