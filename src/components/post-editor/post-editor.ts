@@ -14,7 +14,7 @@ export default Vue.extend({
 			newCategoryInput: false,
 			content: "",
 			author: "",
-			categories: []
+			categories: new Array()
 		}
 	},
 	
