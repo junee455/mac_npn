@@ -6,6 +6,7 @@ export default Vue.extend({
 	
 	data() {
 		return {
+			authorized: false,
 			focusSearch: {
 				categories: false,
 				author: false,
@@ -31,6 +32,10 @@ export default Vue.extend({
 
 	
 	mounted() {
+		axios.get("http://localhost:8000/api/isAuthorized").then((response) => {
+						 if(response.status == 200)
+								 this.authorized = true
+				 })
 		axios.get("http://localhost:8000/api/posts").then((response) => {
 			this.posts = response.data
 			console.log(this.posts)

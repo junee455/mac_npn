@@ -1,0 +1,29 @@
+.form {
+		&> div {
+				align-items: baseline;
+				width: 60%;
+				max-width: 600px;
+				display: flex;
+				justify-content: space-between;
+				margin: 20px;
+				margin-left: auto;
+				margin-right: auto;
+		}
+}
+
+%generic-button {
+		padding: 10px;
+		width: fit-content;
+		border-radius: 5px;
+		cursor: default;
+		user-select: none;
+		margin: 10px;
+}
+
+.login-button {
+		@extend %generic-button;
+		background-color: #404040;
+		color: white;
+		height: fit-content;
+
+}

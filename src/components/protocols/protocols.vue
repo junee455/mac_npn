@@ -88,6 +88,7 @@
 			</div>
 			
 			<div class="edit-button"
+					 v-if="authorized"
 					 @click="editPost(post._id)"></div>
 		</router-link>
 	</div>
