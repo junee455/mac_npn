@@ -129,6 +129,7 @@ input {
 }
 
 .search-bar {
+		max-width: 700px;
 		display: flex;
 		align-items: baseline;
 		justify-content: space-between;
@@ -153,12 +154,11 @@ input {
 		}
 		
 		.search-input {
-				
 				background-image: url(../../assets/magnifier.svg);
 				background-repeat: no-repeat;
 				background-position: left;
 				background-size: 1.5em;
-				&:focus {
+				&:focus, &.text {
 						background-image: none;
 				}
 		}

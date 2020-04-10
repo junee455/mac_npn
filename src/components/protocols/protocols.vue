@@ -2,13 +2,14 @@
 	<div>
 		<div class="search-bar">
 			<input class="search-input"
+						 :class="[searchParams.text.length ? 'text' : '']"
 						 v-model="searchParams.text"/>
 			<button :class="[searchParametersActive ? 'parameters-active' : 'parameters-inactive']"
 							@click="searchParametersActive = !searchParametersActive">Парметры</button>
 			<button class="search-button"
 							@click="findPosts()">Найти</button>
 		</div>
-		<div style="display: flex; justify-content: space-between;"
+		<div style="display: flex; justify-content: space-between; max-width: 700px"
 				 :class="[searchParametersActive ? '' : 'hidden']">
 			<div class="search-parameters">
 				<div>Категории
