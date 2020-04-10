@@ -43,6 +43,10 @@ export default new Router({
 			path: '/post-editor',
 			name: 'post-editor',
 			component: PostEditor
+		}, {
+			path: '/post-editor/:postId',
+			name: 'post-editor',
+			component: PostEditor
 		},
 		{
 			path: '/protocols/:postId',

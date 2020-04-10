@@ -3,7 +3,7 @@
 		<vue-editor ref="vEditor" v-model="content"></vue-editor>
 		<div class="sub-menu">
 			<div class="post-button"
-					 @click="post()">опубликовать</div>
+					 @click="post()">{{postId ? "сохранить" : "опубликовать"}}</div>
 			<div>категории
 				<span class="category-tag"
 							@click="deleteCategory(index)"
@@ -19,6 +19,9 @@
 			</div>
 			<div>автор <input v-model="author" class="author-input"/></div>
 		</div>
+		<div class="delete-button"
+				 v-if="postId"
+				 @click="deletePost()">Удалить</div>
 	</div>
 </template>
 

@@ -10,6 +10,7 @@ export default Vue.extend({
 	
 	data() {
 		return {
+			postId: "",
 			newCategory: "",
 			newCategoryInput: false,
 			content: "",
@@ -33,6 +34,17 @@ export default Vue.extend({
 
 	
 	mounted() {
+		this.postId = this.$route.params.postId
+		if(!!this.postId) {
+			axios.post("http://localhost:8000/api/get-post", {postId: this.postId}).then((res) => {
+				console.log("single post")
+				console.log(res.data)
+				this.content = res.data.text
+				this.author = res.data.author
+				this.categories = res.data.category
+			})
+		}
+		console.log("this.postId", this.$route.params.postId)
 	},
 	
 	beforeDestroy() {
@@ -41,6 +53,13 @@ export default Vue.extend({
 	beforeMount() {},
 	
 	methods: {
+		deletePost() {
+			if(this.postId) {
+				axios.post("http://localhost:8000/api/delete-post", {postId: this.postId})
+				this.postId = ""
+			}
+		},
+		
 		deleteCategory(index) {
 			this.categories.splice(index, 1)
 		},
@@ -63,9 +82,15 @@ export default Vue.extend({
 			let text = this.content
 			console.log(text)
 
-			axios.post("http://localhost:8000/api/new-post", {text: text}).then((response) => {
-				console.log("posted:", response)
-			})
+			if(this.postId) {
+				axios.post("http://localhost:8000/api/update-post", {text: text, category: this.categories, author: this.author, postId: this.postId}).then((response) => {
+					console.log("updated:", response)
+				})
+			} else {
+				axios.post("http://localhost:8000/api/new-post", {text: text, category: this.categories, author: this.author}).then((response) => {
+					console.log("posted:", response)
+				})
+			}
 		},
 	}	
 
