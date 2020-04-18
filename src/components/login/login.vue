@@ -6,7 +6,7 @@
 			<div>Пароль
 				<input type="password"
 							 v-model="password"/></div>
-				<button class="login-button"
+				<button class="generic-black-button"
 								@click="login()">Войти</button>
 	</div>
 </template>

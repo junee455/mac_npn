@@ -2,10 +2,10 @@
   <div id="app">
     <div id="nav">
 			<div class="logo"></div>
-			<router-link to="/protocols">протоколы</router-link>
-			<router-link to="/resolutions">решения спб мас</router-link>
-			<router-link to="/regulations">устав</router-link>
-			<router-link v-if="authorized" to="/post-editor">новая запись</router-link>
+			<router-link to="/protocols">Протоколы</router-link>
+			<router-link to="/resolutions">Решения спб мас</router-link>
+			<router-link to="/regulations">Устав</router-link>
+			<router-link v-if="authorized" to="/post-editor">Новая запись</router-link>
     </div>
     <router-view id="router-view"/>
   </div>
@@ -26,7 +26,7 @@
 				 }
 		 },
 		 mounted() {
-				 axios.get("http://localhost:8000/api/isAuthorized").then((response) => {
+				 axios.get("http://172.16.4.116:8000/api/isAuthorized").then((response) => {
 						 if(response.status == 200)
 								 this.authorized = true
 				 })

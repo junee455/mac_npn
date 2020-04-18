@@ -40,7 +40,7 @@ export default Vue.extend({
 	beforeMount() {
 		let postId = this.$route.params.postId
 		console.log("post id", postId);
-		axios.post("http://localhost:8000/api/get-post", {postId: postId}).then((res) => {
+		axios.post("http://172.16.4.116:8000/api/get-post", {postId: postId}).then((res) => {
 			console.log("single post")
 			console.log(res.data)
 			this.content = res.data.text

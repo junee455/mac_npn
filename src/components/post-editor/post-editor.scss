@@ -1,18 +1,4 @@
-%generic-button {
-		padding: 10px;
-		width: fit-content;
-		border-radius: 5px;
-		cursor: default;
-		user-select: none;
-		margin: 10px;
-}
-
-.post-button {
-		background-color: black;
-		color: white;
-		@extend %generic-button;
-		
-}
+@import "@/global.scss";
 
 .sub-menu {
 		margin-top: 10px;

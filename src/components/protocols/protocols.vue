@@ -6,7 +6,7 @@
 						 v-model="searchParams.text"/>
 			<button :class="[searchParametersActive ? 'parameters-active' : 'parameters-inactive']"
 							@click="searchParametersActive = !searchParametersActive">Парметры</button>
-			<button class="search-button"
+			<button class="generic-black-button"
 							@click="findPosts()">Найти</button>
 		</div>
 		<div style="display: flex; justify-content: space-between; max-width: 700px"
@@ -59,7 +59,7 @@
 								 v-model="searchParams.dateTo"/>
 				</div>
 			</div>
-			<button class="clear-button"
+			<button class="generic-black-button"
 							@click="clearSearch()">Сброс</button>
 		</div>
 		<router-link v-for="post of posts"

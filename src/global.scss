@@ -1,3 +1,22 @@
+ @import "~vue2-editor/dist/vue2-editor.css";
+ @import '~quill/dist/quill.core.css';
+
+%generic-button {
+		padding: 10px;
+		width: fit-content;
+		border-radius: 5px;
+		cursor: pointer;
+		user-select: none;
+		margin: 10px;
+}
+ 
+.generic-black-button {
+		@extend %generic-button;
+		background-color: #404040;
+		color: white;
+		height: fit-content;
+}
+
 * {
 		font-family: 'Roboto';
 		// font-style: normal;
@@ -21,7 +40,7 @@ body, html, #app {
 		background-color: #EBEBEB;
 		display: flex;
 		flex-direction: column;
-		overflow: scroll;
+		overflow: hidden;
 }
 #nav {
 		min-height: 78px;
@@ -50,12 +69,12 @@ body, html, #app {
 		background-color: #f9f9f9;
 		margin-left: auto;
 		margin-right: auto;
-		overflow: scroll;
+		overflow-y: auto;
 		padding: 30px;
 }
 
 .logo {
-		background-image: url(./assets/logo.svg);
+		background-image: url(~@/assets/logo.svg);
 		background-repeat: no-repeat;
 		background-position: center;
 		background-size: contain;

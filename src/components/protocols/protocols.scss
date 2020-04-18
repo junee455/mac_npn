@@ -3,14 +3,7 @@ button {
 		background: transparent;
 }
 
-%generic-button {
-		padding: 10px;
-		width: fit-content;
-		border-radius: 5px;
-		cursor: default;
-		user-select: none;
-		margin: 10px;
-}
+
 
 .big-plus-button {
 		font-size: 25px;
@@ -109,7 +102,7 @@ input {
 				&-items {
 						max-height: 300px;
 						height: fit-content;
-						overflow: scroll;
+						overflow-y: auto;
 						&> div {
 								padding: 4px;
 								&:hover {
@@ -119,13 +112,6 @@ input {
 				}
 		}
 		
-}
-
-.search-button, .clear-button {
-		@extend %generic-button;
-		background-color: #404040;
-		color: white;
-		height: fit-content;
 }
 
 .search-bar {
