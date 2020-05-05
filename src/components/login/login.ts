@@ -5,9 +5,6 @@ axios.defaults.withCredentials = true
 
 export default Vue.extend({
 	name: "login",
-	// inject: {
-		// host: 'host'
-	// },
 	data() {
 		return {
 			email: "",
@@ -20,8 +17,9 @@ export default Vue.extend({
 				console.log(response.data)
 				this.$cookies.set('secret-key', response.data)
 				console.log(document.cookie)
-				this.$router.push('protocols/')
-				this.$router.go(1);
+				this.$router.push('/protocols/')
+				this.$router.forward()
+				// this.$router.go(1);
 			})
 		}
 	}

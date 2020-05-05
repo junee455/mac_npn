@@ -5,16 +5,13 @@ import { VueEditor } from 'vue2-editor'
 export default Vue.extend({
 	name: "post-editor",
 	
-	// inject: {
-		// host: 'host'
-	// },
-	
 	components: { 
    VueEditor
   },
 	
 	data() {
 		return {
+			authorized: false,
 			postId: "",
 			newCategory: "",
 			newCategoryInput: false,
@@ -25,31 +22,59 @@ export default Vue.extend({
 	},
 	
 	watch: {
-		cabinetsData: {
+		postId: {
 			deep: true,
 			handler(newData) {
+				if(!!this.postId) {
+					this.content = ""
+				}
 			}
 		},
 
 		
-		activeDropDown(newData, oldData) {
-		}
 	},
 	
-
+	
 	
 	mounted() {
 		this.postId = this.$route.params.postId
-		if(!!this.postId) {
-			axios.post(this.$host + "api/get-post", {postId: this.postId}).then((res) => {
-				console.log("single post")
-				console.log(res.data)
-				this.content = res.data.text
-				this.author = res.data.author
-				this.categories = res.data.category
-			})
-		}
-		console.log("this.postId", this.$route.params.postId)
+		
+		this.$router.beforeResolve((to, from, next) => {
+			this.postId = (to.params.postId) ? to.params.postId : ''
+			// if user creates new post
+			if(!this.postId) {
+				console.log('empty content')
+				this.content = ""
+				this.$forceUpdate()
+			} else {
+				this.getPost(this.postId)
+			}
+				
+			next()
+		})
+		
+		if(!!this.postId)
+			this.getPost(this.postId)
+		
+		// axios.get(this.$host + "api/isAuthorized").then((response) => {
+		// 	console.log("post-editor", response.status);
+		// 	if(response.status == 200) {
+		// 		this.authorized = true
+		// 		if(!!this.postId) {
+
+		// 		}
+		// 		console.log("this.postId", this.$route.params.postId)
+		// 	}})
+		
+
+		
+		// .catch((_) => {
+		// console.log("unauthorized");
+		// this.$router.push('/login');
+		// this.$router.go(1);
+		// })
+		
+
 	},
 	
 	beforeDestroy() {
@@ -58,9 +83,22 @@ export default Vue.extend({
 	beforeMount() {},
 	
 	methods: {
+		catchAuth(error) {
+
+		},
+		getPost(postId:string) {
+			axios.post(this.$host + "api/get-post", {postId: postId}).then((res) => {
+				console.log("single post")
+				console.log(res.data)
+				this.content = res.data.text
+				this.author = res.data.author
+				this.categories = res.data.category
+			})
+		},
 		deletePost() {
 			if(this.postId) {
 				axios.post(this.$host + "api/delete-post", {postId: this.postId})
+
 				this.postId = ""
 			}
 		},

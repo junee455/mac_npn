@@ -4,10 +4,6 @@ import axios from 'axios';
 export default Vue.extend({
 	name: "single-post",
 	
-	// inject: {
-		// host: 'host'
-	// },
-	
 	props: {
 		postId: {
 			type: String

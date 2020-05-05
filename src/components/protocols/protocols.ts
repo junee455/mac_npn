@@ -4,10 +4,6 @@ import axios from 'axios';
 export default Vue.extend({
 	name: "protocols",
 	
-	// inject: {
-		// host: 'host'
-	// },
-	
 	data() {
 		return {
 			authorized: false,
@@ -36,6 +32,7 @@ export default Vue.extend({
 
 	
 	mounted() {
+		console.log("from protocols:", this.$host);
 		axios.get(this.$host + "api/isAuthorized").then((response) => {
 						 if(response.status == 200)
 								 this.authorized = true
@@ -91,10 +88,10 @@ export default Vue.extend({
 				}})}
 
 			}
-			
+
 			console.log(params)
 			if(params.length) {
-				axios.post(this.$host + "/api/posts-find", params).then((response) => {
+				axios.post(this.$host + "api/posts-find", params).then((response) => {
 					console.log(response.data)
 					this.posts = response.data
 				})
@@ -126,11 +123,12 @@ export default Vue.extend({
 		},
 		editPost(id) {
 			this.editClicked = true
-			this.$router.push("post-editor/" + id)
+
+			this.$router.push("/post-editor/" + id)
 		},
 		confirm(postId) {
 			if(!this.editClicked)
-				this.$router.push("protocols/" + postId)
+				this.$router.push("/protocols/" + postId)
 			this.editClicked = false
 		}
 	}	

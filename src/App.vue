@@ -11,30 +11,50 @@
   </div>
 </template>
 
-<script>
- import Vue from 'vue';
- import axios from 'axios';
+<script lang="ts">
+import Vue from 'vue';
+import axios from 'axios';
 
- 
- axios.defaults.withCredentials = true
+axios.defaults.withCredentials = true
 
- export default Vue.extend({
-		 name: "app",
-		 inject: ['host'],
-		 data() {
-				 return {
-						 authorized: false
-				 }
-		 },
-		 mounted() {
-				 axios.get(this.host + "api/isAuthorized").then((response) => {
-						 if(response.status == 200)
-								 this.authorized = true
-				 })
-		 }
- })
+export default Vue.extend({
+	name: "app",
+	data() {
+		return {
+			authorized: false
+		}
+	},
+	mounted() {
+		// this.$host = 'http://localhost:8000/';
+		let isAuthorized = (next = <any>undefined, to = <any>undefined) => {
+			axios.get(this.$host + "api/isAuthorized").then((response) => {
+				if(response.status == 200) {
+					this.authorized = true
+					if(!!next)
+						next()
+				}}).catch((_) => {
+					console.log("next:", next)
+					this.authorized = false
+					if(!!to && to.name == "post-editor") {
+						next({name: '/login'})
+					}
+					else if(!!next)
+						next()
+				})
+		}
+		
+		
+		
+		this.$router.beforeResolve((to, from, next) => {
+			console.log("the App guard");
+			isAuthorized(next, to)
+		})
+		
+		isAuthorized()
+	}
+})
 
- 
+
 </script>
 
 <style lang="scss" src="./global.scss">
