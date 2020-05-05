@@ -4,6 +4,8 @@ import axios from 'axios';
 export default Vue.extend({
 	name: "protocols",
 	
+	inject: ['host'],
+	
 	data() {
 		return {
 			authorized: false,
@@ -32,15 +34,15 @@ export default Vue.extend({
 
 	
 	mounted() {
-		axios.get("http://172.16.4.116:8000/api/isAuthorized").then((response) => {
+		axios.get(this.host + "api/isAuthorized").then((response) => {
 						 if(response.status == 200)
 								 this.authorized = true
 				 })
-		axios.get("http://172.16.4.116:8000/api/posts").then((response) => {
+		axios.get(this.host + "api/posts").then((response) => {
 			this.posts = response.data
 			console.log(this.posts)
 		})
-		axios.get("http://172.16.4.116:8000/api/categories").then((response) => {
+		axios.get(this.host + "api/categories").then((response) => {
 			this.searchSuggestions = response.data
 		})
 	},
@@ -90,12 +92,12 @@ export default Vue.extend({
 			
 			console.log(params)
 			if(params.length) {
-				axios.post("http://172.16.4.116:8000/api/posts-find", params).then((response) => {
+				axios.post(this.host + "/api/posts-find", params).then((response) => {
 					console.log(response.data)
 					this.posts = response.data
 				})
 			} else {
-				axios.get("http://172.16.4.116:8000/api/posts").then((response) => {
+				axios.get(this.host + "api/posts").then((response) => {
 					this.posts = response.data
 					console.log(this.posts)
 				})

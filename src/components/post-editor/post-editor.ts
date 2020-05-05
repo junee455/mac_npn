@@ -4,6 +4,9 @@ import { VueEditor } from 'vue2-editor'
 
 export default Vue.extend({
 	name: "post-editor",
+	
+	inject: ['host'],
+	
 	components: { 
    VueEditor
   },
@@ -36,7 +39,7 @@ export default Vue.extend({
 	mounted() {
 		this.postId = this.$route.params.postId
 		if(!!this.postId) {
-			axios.post("http://172.16.4.116:8000/api/get-post", {postId: this.postId}).then((res) => {
+			axios.post(this.host + "api/get-post", {postId: this.postId}).then((res) => {
 				console.log("single post")
 				console.log(res.data)
 				this.content = res.data.text
@@ -55,7 +58,7 @@ export default Vue.extend({
 	methods: {
 		deletePost() {
 			if(this.postId) {
-				axios.post("http://172.16.4.116:8000/api/delete-post", {postId: this.postId})
+				axios.post(this.host + "api/delete-post", {postId: this.postId})
 				this.postId = ""
 			}
 		},
@@ -83,11 +86,11 @@ export default Vue.extend({
 			console.log(text)
 
 			if(this.postId) {
-				axios.post("http://172.16.4.116:8000/api/update-post", {text: text, category: this.categories, author: this.author, postId: this.postId}).then((response) => {
+				axios.post(this.host + "api/update-post", {text: text, category: this.categories, author: this.author, postId: this.postId}).then((response) => {
 					console.log("updated:", response)
 				})
 			} else {
-				axios.post("http://172.16.4.116:8000/api/new-post", {text: text, category: this.categories, author: this.author}).then((response) => {
+				axios.post(this.host + "api/new-post", {text: text, category: this.categories, author: this.author}).then((response) => {
 					console.log("posted:", response)
 				})
 			}

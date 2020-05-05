@@ -5,6 +5,7 @@ axios.defaults.withCredentials = true
 
 export default Vue.extend({
 	name: "login",
+	inject: ['host'],
 	data() {
 		return {
 			email: "",
@@ -13,10 +14,12 @@ export default Vue.extend({
 	},
 	methods: {
 		login() {
-			axios.post("http://172.16.4.116:8000/api/login", this.$data).then((response) => {
+			axios.post(this.host + "api/login", this.$data).then((response) => {
 				console.log(response.data)
 				this.$cookies.set('secret-key', response.data)
 				console.log(document.cookie)
+				this.$router.push('protocols/')
+				this.$router.go();
 			})
 		}
 	}

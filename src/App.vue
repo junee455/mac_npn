@@ -20,13 +20,14 @@
 
  export default Vue.extend({
 		 name: "app",
+		 inject: ['host'],
 		 data() {
 				 return {
 						 authorized: false
 				 }
 		 },
 		 mounted() {
-				 axios.get("http://172.16.4.116:8000/api/isAuthorized").then((response) => {
+				 axios.get(this.host + "api/isAuthorized").then((response) => {
 						 if(response.status == 200)
 								 this.authorized = true
 				 })
