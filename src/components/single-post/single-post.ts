@@ -4,7 +4,9 @@ import axios from 'axios';
 export default Vue.extend({
 	name: "single-post",
 	
-	inject: ['host'],
+	// inject: {
+		// host: 'host'
+	// },
 	
 	props: {
 		postId: {
@@ -42,7 +44,7 @@ export default Vue.extend({
 	beforeMount() {
 		let postId = this.$route.params.postId
 		console.log("post id", postId);
-		axios.post(this.host + "api/get-post", {postId: postId}).then((res) => {
+		axios.post(this.$host + "api/get-post", {postId: postId}).then((res) => {
 			console.log("single post")
 			console.log(res.data)
 			this.content = res.data.text

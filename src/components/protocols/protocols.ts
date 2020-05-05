@@ -4,7 +4,9 @@ import axios from 'axios';
 export default Vue.extend({
 	name: "protocols",
 	
-	inject: ['host'],
+	// inject: {
+		// host: 'host'
+	// },
 	
 	data() {
 		return {
@@ -34,15 +36,15 @@ export default Vue.extend({
 
 	
 	mounted() {
-		axios.get(this.host + "api/isAuthorized").then((response) => {
+		axios.get(this.$host + "api/isAuthorized").then((response) => {
 						 if(response.status == 200)
 								 this.authorized = true
 				 })
-		axios.get(this.host + "api/posts").then((response) => {
+		axios.get(this.$host + "api/posts").then((response) => {
 			this.posts = response.data
 			console.log(this.posts)
 		})
-		axios.get(this.host + "api/categories").then((response) => {
+		axios.get(this.$host + "api/categories").then((response) => {
 			this.searchSuggestions = response.data
 		})
 	},
@@ -92,12 +94,12 @@ export default Vue.extend({
 			
 			console.log(params)
 			if(params.length) {
-				axios.post(this.host + "/api/posts-find", params).then((response) => {
+				axios.post(this.$host + "/api/posts-find", params).then((response) => {
 					console.log(response.data)
 					this.posts = response.data
 				})
 			} else {
-				axios.get(this.host + "api/posts").then((response) => {
+				axios.get(this.$host + "api/posts").then((response) => {
 					this.posts = response.data
 					console.log(this.posts)
 				})

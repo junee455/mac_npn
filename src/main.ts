@@ -9,7 +9,12 @@ Vue.config.productionTip = false;
 Vue.use(VueCookies)
 Vue.use(Vue2Editor)
 
+// interface Vue {
+// 	$host: 'http://localhost:8000/'
+// }
+
 let vm = new Vue({
+	// $host: 'http://localhost:8000/',
 	provide: function() {
 		return {
 			// host: 'http://172.16.4.116:8000/'
@@ -19,3 +24,4 @@ let vm = new Vue({
   router,
   render: (h) => h(App),
 }).$mount('#app');
+
